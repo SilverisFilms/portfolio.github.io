@@ -1,4 +1,56 @@
-/* Reset y estilos generales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#perfil .content {
+    max-width: 90%;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    #perfil h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        padding: 0 10px;
+    }
+    
+    #perfil p {
+        font-size: 1rem;
+        line-height: 1.5;
+        padding: 0 10px;
+    }
+    
+    .section {
+        padding: 80px 15px 40px;
+    }
+}
+
+
+.video-container {
+    width: 100%;
+    margin: 0 auto 30px;
+    max-width: 800px; 
+}
+
+
+@media (max-width: 480px) {
+    .btn-contact {
+        width: 90%;
+        max-width: 300px;
+    }
+    
+    #navbar li {
+        margin: 0 8px;
+    }
+    
+    #navbar a {
+        font-size: 0.9rem;
+    }
+}
+
 body {
     font-family: 'Helvetica', sans-serif;
     margin: 0;
@@ -37,7 +89,7 @@ body {
     opacity: 0;
 }
 
-/* Capa de contenido */
+
 .content-overlay {
     position: relative;
     background: rgba(255, 255, 255, 0.043);
@@ -100,7 +152,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px;
-    opacity: 0; /* Inicialmente invisible para la animación */
+    opacity: 0;
     animation: fadeIn 3s ease-in-out forwards;
     position: relative;
     z-index: 2;
@@ -109,7 +161,7 @@ body {
     max-width: 800px;
     padding: 40px;
     text-align: center;
-    color: white; /* Texto blanco para contraste */
+    color: white;
 }
 
 /* Animación de difuminado */
@@ -122,7 +174,6 @@ body {
     }
 }
 
-/* Asegurar que el texto sea legible */
 #perfil h1 {
     font-size: 3rem;
     margin-bottom: 20px;
