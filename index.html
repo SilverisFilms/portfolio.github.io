@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SILVERIS FILMS | Portafolio Audiovisual</title>
+    <link rel="icon" type="image/png" href="assets/favicon/favic.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles/main.css">
-<link rel="icon" href="assets/favicon/favicon.png" sizes="any">
-<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
-
-<!-- Windows Metro -->
-<meta name="msapplication-TileColor" content="#171718">
-<meta name="theme-color" content="#171718">
 </head>
 <body>
+    <!-- Pantalla de bienvenida -->
+    <div id="welcome-screen" class="welcome-screen">
+        <img src="assets/images/Open.png" alt="Silveris Films Logo">
+    </div>
+
     <!-- Videos de fondo -->
     <div class="video-background">
         <video autoplay muted loop playsinline id="video1">
@@ -48,14 +48,25 @@
         <section id="trabajos" class="section">
             <div class="content">
                 <h2>Trabajos Recientes</h2>
-                <div class="video-container">
-                    <iframe src="https://player.vimeo.com/video/948496630?badge=0&amp;autopause=0" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://player.vimeo.com/video/1063707422?badge=0&amp;autopause=0" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://player.vimeo.com/video/1076565139?badge=0&amp;autopause=0" frameborder="0" allowfullscreen></iframe>
+                
+                <div class="video-grid">
+                    <div class="video-wrapper">
+                        <div class="video-container">
+                            <iframe src="https://player.vimeo.com/video/948496630?badge=0&amp;autopause=0" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <div class="video-wrapper">
+                        <div class="video-container">
+                            <iframe src="https://player.vimeo.com/video/1063707422?badge=0&amp;autopause=0" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <div class="video-wrapper">
+                        <div class="video-container">
+                            <iframe src="https://player.vimeo.com/video/1076565139?badge=0&amp;autopause=0" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -77,7 +88,7 @@
                 </div>
             </div>
         </section>
-    </div> <!-- Cierre de content-overlay -->
+    </div>
 
     <script src="scripts/main.js"></script>
 </body>
