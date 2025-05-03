@@ -1,87 +1,74 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Control de videos de fondo
-    const video1 = document.getElementById('video1');
-    const video2 = document.getElementById('video2');
-    const perfilSection = document.getElementById('perfil');
-    if (perfilSection) {
-        perfilSection.style.animation = 'fadeIn 3s ease-in-out forwards';
+    const welcomeScreen = document.getElementById('welcome-screen');
+    
+    if (welcomeScreen) {
+        // Mostrar por 3 segundos luego desaparecer
+        setTimeout(() => {
+            welcomeScreen.classList.add('hide');
+            
+            // Eliminar completamente después de la animación
+            setTimeout(() => {
+                welcomeScreen.remove();
+            }, 1000);
+        }, 1500);
     }
+     // Control de videos de fondo
+     const video1 = document.getElementById('video1');
+    const video2 = document.getElementById('video2');
     let currentVideo = video1;
 
-    function initVideos() {
-        // Configuración inicial de videos
-        [video1, video2].forEach(video => {
-            video.style.position = 'fixed';
-            video.style.top = '0';
-            video.style.left = '0';
-            video.style.width = '100%';
-            video.style.height = '100%';
-            video.style.objectFit = 'cover';
-            video.style.zIndex = '-1';
-            video.play().catch(e => console.log(`Autoplay bloqueado: ${e}`));
-        });
-
-        // Mostrar solo el primer video inicialmente
-        video1.style.opacity = '1';
+    // Función para ocultar videos de fondo
+    function hideBackgroundVideos() {
+        video1.style.opacity = '0';
         video2.style.opacity = '0';
-
-        // Rotación cada 30 segundos
-        setInterval(() => {
-            if (currentVideo === video1) {
-                video1.style.opacity = '0';
-                video2.style.opacity = '1';
-                currentVideo = video2;
-            } else {
-                video1.style.opacity = '1';
-                video2.style.opacity = '0';
-                currentVideo = video1;
-            }
-        }, 30000);
     }
 
-    // Navegación
-    const navLinks = document.querySelectorAll('#navbar a');
-    const sections = document.querySelectorAll('section[id]');
+    // Función para mostrar videos de fondo
+    function showBackgroundVideos() {
+        currentVideo.style.opacity = '0.6';
+    }
 
-    function updateActiveMenu() {
-        let current = '';
-        const scrollPosition = window.scrollY + 100;
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
+    // Controlador de eventos para los iframes de Vimeo
+    function setupVimeoPlayers() {
+        const videoContainers = document.querySelectorAll('.video-container');
+        
+        videoContainers.forEach(container => {
+            const iframe = container.querySelector('iframe');
             
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
-        });
-    }
-
-    function setupSmoothScroll() {
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
+            // Observar cuando el mouse entra al contenedor
+            container.addEventListener('mouseenter', () => {
+                hideBackgroundVideos();
+            });
+            
+            // Observar cuando el mouse sale del contenedor
+            container.addEventListener('mouseleave', () => {
+                showBackgroundVideos();
+            });
+            
+            // Permitir clics directos en el iframe
+            iframe.addEventListener('click', (e) => {
+                e.stopPropagation();
             });
         });
     }
 
+    // Inicialización de videos de fondo
+    function initBackgroundVideos() {
+        [video1, video2].forEach(video => {
+            video.style.opacity = video === currentVideo ? '0.5' : '0';
+            video.play().catch(e => console.log(e));
+        });
+
+        setInterval(() => {
+            currentVideo.style.opacity = '0';
+            currentVideo = currentVideo === video1 ? video2 : video1;
+            currentVideo.style.opacity = '1';
+        }, 30000);
+    }
+
     // Inicialización
-    initVideos();
-    setupSmoothScroll();
-    window.addEventListener('scroll', updateActiveMenu);
-    updateActiveMenu(); // Actualizar al cargar
+    setupVimeoPlayers();
+    initBackgroundVideos();
 });
